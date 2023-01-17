@@ -243,5 +243,46 @@ describe("Filtros", () => {
 
     describe("Filtro por nome e categoria", () => {
 
+        it("Deve retornar lista completa quando nome for vazio e categoria for todas", () => {
+            const nome = "", categoria = "todas";
+            const resultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtos);
+            expect(resultado).toHaveLength(20);
+        });
+
+        it("Deve retornar lista completa de bebidas quando nome for vazio e categoria for bebidas", () => {
+            const nome = "", categoria = "bebidas";
+            const resultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtos);
+            expect(resultado).toHaveLength(6);
+        });
+
+        it("Deve retornar uma lista de sucos com a categoria bebidas selecionada e quando nome for suco", () => {
+            const nome = "suco", categoria = "bebidas";
+            const resultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtos);
+            expect(resultado).toHaveLength(2);
+        });
+
+        it("Deve retornar uma lista vazia com a categoria bebidas selecionada e quando nome for tomate", () => {
+            const nome = "tomate", categoria = "bebidas";
+            const resultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtos);
+            expect(resultado).toHaveLength(0);
+        });
+
+        it("Deve retornar uma lista vazia quando nome e categoria for vazio", () => {
+            const nome = "", categoria = "";
+            const resultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtos);
+            expect(resultado).toHaveLength(0);
+        });
+
+        it(`Com a categoria bebidas selecionada e com nome tomate, quando alterar a categoria para verduras, 
+        deve mostrar apenas tomate`, () => {
+            const nome: string = "tomate"; 
+            let categoria: string = "bebidas";
+            const produtosResultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtos);
+            expect(produtosResultado).toHaveLength(0);
+
+            categoria = "verduras";
+            const resultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtosResultado);
+            expect(resultado).toHaveLength(1);
+        });
     });
 });
