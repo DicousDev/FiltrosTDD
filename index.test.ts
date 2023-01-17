@@ -1,4 +1,4 @@
-import { filtrarPorNome, filtrarPorCategoria } from "./index";
+import { filtrarPorNome, filtrarPorCategoria, filtraProdutosPeloNomeCategoria } from "./index";
 import { produtos } from "./mocks/produtos";
 import { ProdutoProps } from "./models/produto";
 
@@ -205,6 +205,11 @@ describe("Filtros", () => {
             expect(resultado).toHaveLength(20);
         });
 
+        it("Deve retornar uma lista completa quando categoria for todas em caixa alta", () => {
+            const resultado = filtrarPorCategoria("TODAS", produtos);
+            expect(resultado).toHaveLength(20);
+        });
+
         it("Deve retornar uma lista completa quando categoria for em branco", () => {
             const resultado = filtrarPorCategoria("", produtos);
             expect(resultado).toHaveLength(20);
@@ -234,5 +239,9 @@ describe("Filtros", () => {
             const resultado = filtrarPorCategoria("teste", produtos);
             expect(resultado).toHaveLength(0);
         });
+    });
+
+    describe("Filtro por nome e categoria", () => {
+
     });
 });
