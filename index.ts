@@ -23,5 +23,12 @@ export function filtrarPorCategoria(categoria: string, produtos: ProdutoProps[])
 }
 
 export function filtraProdutosPeloNomeCategoria(nome: string, categoria: string, produtos: ProdutoProps[]): ProdutoProps[] {
-    return [];
+    
+    if(categoria.trim() === "") {
+        return [];
+    }
+
+    const produtosFiltradosPelaCategoria: ProdutoProps[] = filtrarPorCategoria(categoria, produtos);
+    const produtosFiltrados: ProdutoProps[] = filtrarPorNome(nome, produtosFiltradosPelaCategoria);
+    return produtosFiltrados;
 }

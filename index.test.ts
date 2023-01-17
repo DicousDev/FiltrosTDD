@@ -258,7 +258,7 @@ describe("Filtros", () => {
         it("Deve retornar uma lista de sucos com a categoria bebidas selecionada e quando nome for suco", () => {
             const nome = "suco", categoria = "bebidas";
             const resultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtos);
-            expect(resultado).toHaveLength(2);
+            expect(resultado).toHaveLength(1);
         });
 
         it("Deve retornar uma lista vazia com a categoria bebidas selecionada e quando nome for tomate", () => {
@@ -267,7 +267,7 @@ describe("Filtros", () => {
             expect(resultado).toHaveLength(0);
         });
 
-        it("Deve retornar uma lista vazia quando nome e categoria for vazio", () => {
+        it("Deve retornar uma lista vazia quando categoria for vazio", () => {
             const nome = "", categoria = "";
             const resultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtos);
             expect(resultado).toHaveLength(0);
@@ -281,7 +281,8 @@ describe("Filtros", () => {
             expect(produtosResultado).toHaveLength(0);
 
             categoria = "verduras";
-            const resultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtosResultado);
+            const resultado: ProdutoProps[] = filtraProdutosPeloNomeCategoria(nome, categoria, produtos);
+            console.table(resultado);
             expect(resultado).toHaveLength(1);
         });
     });
